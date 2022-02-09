@@ -30,7 +30,11 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employees")
-	public Employee saveEmployee(@RequestBody Employee employee) {
+	public Employee addEmployee(@RequestBody Employee employee) {
+		Employee employee2 = new Employee();
+		employee2.setName(employee.getName());
+		employee2.setTelephones(employee.getTelephones());
+		
 		return employeeManager.save(employee);
 	}
 

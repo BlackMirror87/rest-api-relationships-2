@@ -27,12 +27,6 @@ public class TelephoneManager {
 	
 	
 	public Telephone save(Telephone telephone) {
-		Telephone telephone2 = new Telephone();
-		telephone2.setNumber(telephone.getNumber());
-
-		Employee employee = new Employee();
-		employee.addTelephone(telephone2);
-		
 		return telephoneRepository.save(telephone);
 	}
 }

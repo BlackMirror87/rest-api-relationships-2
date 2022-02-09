@@ -8,6 +8,8 @@ public class RestApiRelationship3Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestApiRelationship3Application.class, args);
+		
+		
 	}
 
 }

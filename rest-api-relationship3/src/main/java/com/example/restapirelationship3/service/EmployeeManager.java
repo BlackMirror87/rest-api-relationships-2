@@ -1,6 +1,7 @@
 package com.example.restapirelationship3.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,7 @@ public class EmployeeManager {
 		this.employeeRepository = employeeRepository;
 	}
 
-	public Employee save(Employee employee){
-		Employee employee2 = new Employee();
-		employee2.setName(employee.getName());
-
-		Telephone telephone = new Telephone();
-		telephone.addEmployee(employee2);
-		
+	public Employee save(Employee employee){	
 		return employeeRepository.save(employee);
 	}
 	
@@ -34,4 +29,8 @@ public class EmployeeManager {
 		return employeeRepository.findAll();
 	}
 
+	
+	public Optional<Employee> findById(Long id) {
+		return employeeRepository.findById(id);
+	}
 }

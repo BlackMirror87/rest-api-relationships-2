@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Entity
@@ -21,6 +23,7 @@ public class Telephone {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	
 	@ManyToMany(mappedBy = "telephones", cascade = CascadeType.ALL)
 	Set<Employee> employees = new HashSet<>();
 
