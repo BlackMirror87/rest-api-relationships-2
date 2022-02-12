@@ -29,8 +29,18 @@ public class EmployeeManager {
 		return employeeRepository.findAll();
 	}
 
+	public List<Employee> findByName(String name){
+		return employeeRepository.findByName(name);
+	}
+
 	
 	public Optional<Employee> findById(Long id) {
 		return employeeRepository.findById(id);
 	}
+	
+	public void deleteById(Long id) {
+		employeeRepository.deleteById(id);
+	}
+	
+	
 }

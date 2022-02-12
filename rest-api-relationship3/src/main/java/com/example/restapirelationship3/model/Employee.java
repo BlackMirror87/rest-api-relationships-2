@@ -9,6 +9,7 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString
@@ -27,5 +28,9 @@ public class Employee {
 	public void addTelephone(Telephone telephone) {
 		this.telephones.add(telephone);
 		telephone.getEmployees().add(this);
+	}
+
+	public Employee(String string) {
+		// TODO Auto-generated constructor stub
 	}
 }

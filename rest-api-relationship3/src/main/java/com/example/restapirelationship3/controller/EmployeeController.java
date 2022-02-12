@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,13 +32,39 @@ public class EmployeeController {
 		return employeeManager.findAll();
 	}
 
+	@GetMapping("/employees/{name}")
+	public List<Employee> findEmployeeByName(@PathVariable String name) {
+		return employeeManager.findByName(name);
+	}
+
+	@GetMapping("/employees/{id}")
+	public Employee findEmployeeById(@PathVariable Long id) {
+		return employeeManager.findById(id).get();
+	}
+	
 	@PostMapping("/employees")
 	public Employee addEmployee(@RequestBody Employee employee) {
 		Employee employee2 = new Employee();
 		employee2.setName(employee.getName());
 		employee2.setTelephones(employee.getTelephones());
-		
+
 		return employeeManager.save(employee);
+	}
+
+	@PutMapping("/employees/{id}")
+	public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee) {
+
+		Employee employee = employeeManager.findById(id).get();
+		employee.setName(newEmployee.getName());
+		employee.setTelephones(newEmployee.getTelephones());
+
+		return employeeManager.save(employee);
+	}
+	
+	
+	@DeleteMapping("/employees/{id}")
+	public void deleteEmployeeById(@PathVariable Long id) {
+		employeeManager.deleteById(id);
 	}
 
 }

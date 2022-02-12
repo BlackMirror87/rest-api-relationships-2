@@ -38,8 +38,28 @@ public class TelephoneController {
 	}
 
 	// Version 2: inserts both entities in each table but there is no match in the join table
+	//@PostMapping("/telephones")
+//	public Telephone addTelephone(@RequestBody Telephone telephone) {
+//		
+//		Telephone telephone2 = new Telephone();
+//		telephone2.setNumber(telephone.getNumber());
+//		telephone2.setEmployees(telephone.getEmployees());
+//		return telephoneManager.save(telephone2);
+//	}
+	
+//	@PostMapping("/telephones")
+//	public Telephone addTelephone(@RequestBody Telephone telephone) {
+//		
+//		Telephone telephone2 = new Telephone();
+//		telephone2.setNumber(telephone.getNumber());
+//		telephone2.setEmployees(telephone.getEmployees());
+//		return telephoneManager.save(telephone2);
+//	}
+	
 	@PostMapping("/telephones")
 	public Telephone addTelephone(@RequestBody Telephone telephone) {
+		Employee employee= new Employee();
+		employee.addTelephone(telephone);
 		
 		Telephone telephone2 = new Telephone();
 		telephone2.setNumber(telephone.getNumber());
