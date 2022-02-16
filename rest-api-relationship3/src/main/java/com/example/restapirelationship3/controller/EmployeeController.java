@@ -39,7 +39,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employees/{id}")
-	public Optional<Employee> findEmployeeById(@PathVariable Long id) {
+	public Employee findEmployeeById(@PathVariable Long id) {
 		return employeeManager.findById(id);
 	}
 	
@@ -55,7 +55,8 @@ public class EmployeeController {
 	@PutMapping("/employees/{id}")
 	public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee) {
 
-		Employee employee = employeeManager.findById(id).get();
+		Employee employee = employeeManager.findById(id);
+				
 		employee.setName(newEmployee.getName());
 		employee.setTelephones(newEmployee.getTelephones());
 

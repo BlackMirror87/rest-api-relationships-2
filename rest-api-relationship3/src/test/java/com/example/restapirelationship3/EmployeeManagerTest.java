@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import org.assertj.core.error.ShouldAccept;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -50,16 +51,27 @@ class EmployeeManagerTest {
 	}
 
 	@Test
-	void shouldFindEmployeeById() {
+	void shouldReturnEmployeeWhenIdExists() {
 
 		Employee employee = new Employee();
 		employee.setId(1L);
 
 		when(employeeRepository.findById(employee.getId())).thenReturn(Optional.of(employee));
 
-		Employee expectedEmployee = employeeManager.findById(employee.getId()).get();
+		Employee expectedEmployee = employeeManager.findById(employee.getId());
 
 		assertThat(expectedEmployee).isSameAs(employee);
+	}
+
+	@Test
+	void shouldThrowExceptionWhenEmployeeNotExist() {
+
+		Employee employee = new Employee();
+		employee.setId(1L);
+
+		when(employeeRepository.findById(any())).thenReturn(Optional.empty());
+
+		assertThrows(NoSuchElementException.class, () -> employeeManager.findById(123L));
 	}
 
 	@Test

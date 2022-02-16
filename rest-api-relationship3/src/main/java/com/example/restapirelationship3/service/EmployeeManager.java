@@ -1,6 +1,7 @@
 package com.example.restapirelationship3.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,14 @@ public class EmployeeManager {
 	}
 
 	
-	public Optional<Employee> findById(Long id) {
-		return employeeRepository.findById(id);
+	public Employee findById(Long id) {
+		return employeeRepository.findById(id)
+				.orElseThrow( ()-> new NoSuchElementException("not found"));
 	}
 	
 	public void deleteById(Long id) {
 		employeeRepository.deleteById(id);
+		
 	}
 	
 	
