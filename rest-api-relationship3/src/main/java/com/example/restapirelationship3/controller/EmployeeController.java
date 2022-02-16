@@ -2,6 +2,7 @@ package com.example.restapirelationship3.controller;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employees/{id}")
-	public Employee findEmployeeById(@PathVariable Long id) {
-		return employeeManager.findById(id).get();
+	public Optional<Employee> findEmployeeById(@PathVariable Long id) {
+		return employeeManager.findById(id);
 	}
 	
 	@PostMapping("/employees")
