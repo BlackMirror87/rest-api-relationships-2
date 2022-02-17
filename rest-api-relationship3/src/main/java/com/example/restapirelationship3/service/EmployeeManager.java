@@ -30,7 +30,7 @@ public class EmployeeManager {
 		return employeeRepository.findAll();
 	}
 
-	public List<Employee> findByName(String name){
+	public Employee findByName(String name){
 		return employeeRepository.findByName(name);
 	}
 

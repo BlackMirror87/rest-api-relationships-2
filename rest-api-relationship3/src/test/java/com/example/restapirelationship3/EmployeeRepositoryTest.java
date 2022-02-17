@@ -10,9 +10,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.restapirelationship3.model.Employee;
 import com.example.restapirelationship3.model.Telephone;
@@ -20,66 +25,34 @@ import com.example.restapirelationship3.repository.EmployeeRepository;
 
 @DataJpaTest
 @Rollback(false)
-@TestMethodOrder(OrderAnnotation.class)
 public class EmployeeRepositoryTest {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
 
 	@Test
-	@Order(1)
-	public void saveEmployeeTest() {
+	void shouldReturnEmployeeByName() {
 
-		Employee employee = Employee.builder().name("ola").build();
-		employeeRepository.save(employee);
-		assertThat(employee.getId()).isGreaterThan(0);
-	}
-
-	@Test
-	@Order(2)
-	public void findEmployeeByIdTest() {
-
-		Long id = 1L;
-		Employee employee = employeeRepository.findById(id).get();
-		assertThat(employee.getId()).isEqualTo(id);
-	}
-
-	@Test
-	@Order(3)
-	public void findEmployeeByNameTest() {
-
-		String name = "ola";
-		List<Employee> employees = employeeRepository.findByName(name);
-		assertThat(employees.contains(name));
-	}
-
-	@Test
-	@Order(4)
-	public void findAllEmployeesTest() {
-
-		List<Employee> employees = employeeRepository.findAll();
-		assertThat(employees.size()).isGreaterThan(0);
-	}
-
-	@Test
-	@Order(5)
-	public void updateEmployeeTest() {
-
-		Long id = 1L;
-		Employee employee = employeeRepository.findById(id).get();
+		Employee employee = new Employee();
 		employee.setName("max");
-		Employee newEmployee = employeeRepository.save(employee);
-		assertThat(newEmployee.getName()).isEqualTo("max");
+		employeeRepository.save(employee);
+
+		Employee expectedEmployee = employeeRepository.findByName(employee.getName());
+
+		assertThat(expectedEmployee.getName()).isEqualTo(employee.getName());
 	}
 
 	@Test
-	@Order(6)
-	public void deleteEmployeeByIdTest() {
-		Long id = 1L;
-		Employee employee = employeeRepository.findById(id).get();
-		employeeRepository.deleteById(id);
-		Employee deletedEmployee = employeeRepository.findById(id).orElse(null);
-		assertThat(deletedEmployee).isNull();
+	void shouldThrowExceptionWhenNameNotExists() {
+
+		Employee employee = new Employee();
+		employee.setName("max");
+		employeeRepository.save(employee);
+
+		Employee expectedEmployee = employeeRepository.findByName("jan");
+
+		assertThat(expectedEmployee).isNull();
 
 	}
+
 }

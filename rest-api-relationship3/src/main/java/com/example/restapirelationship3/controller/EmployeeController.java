@@ -34,7 +34,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employees/{name}")
-	public List<Employee> findEmployeeByName(@PathVariable String name) {
+	public Employee findEmployeeByName(@PathVariable String name) {
 		return employeeManager.findByName(name);
 	}
 

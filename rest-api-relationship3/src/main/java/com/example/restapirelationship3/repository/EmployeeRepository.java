@@ -10,5 +10,5 @@ import com.example.restapirelationship3.model.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	
-	List<Employee> findByName(String name);
+	Employee findByName(String name);
 }
