@@ -19,7 +19,7 @@ public class Telephone {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "telephones", cascade = CascadeType.ALL)
 	Set<Employee> employees = new HashSet<>();
 

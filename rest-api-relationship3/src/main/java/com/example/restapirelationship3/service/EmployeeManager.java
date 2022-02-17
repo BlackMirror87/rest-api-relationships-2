@@ -30,7 +30,11 @@ public class EmployeeManager {
 		return employeeRepository.findAll();
 	}
 
-	public Employee findByName(String name){
+	public Employee findByName(String name) {
+		
+		if (employeeRepository.findByName(name)== null) { 
+			throw new NoSuchElementException("not found");}
+					
 		return employeeRepository.findByName(name);
 	}
 

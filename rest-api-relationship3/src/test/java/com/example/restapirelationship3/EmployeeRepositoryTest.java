@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import static org.assertj.core.api.Assertions.*;
@@ -22,6 +23,7 @@ import java.util.Optional;
 import com.example.restapirelationship3.model.Employee;
 import com.example.restapirelationship3.model.Telephone;
 import com.example.restapirelationship3.repository.EmployeeRepository;
+
 
 @DataJpaTest
 @Rollback(false)
@@ -41,18 +43,6 @@ public class EmployeeRepositoryTest {
 
 		assertThat(expectedEmployee.getName()).isEqualTo(employee.getName());
 	}
-
-	@Test
-	void shouldThrowExceptionWhenNameNotExists() {
-
-		Employee employee = new Employee();
-		employee.setName("max");
-		employeeRepository.save(employee);
-
-		Employee expectedEmployee = employeeRepository.findByName("jan");
-
-		assertThat(expectedEmployee).isNull();
-
-	}
+	
 
 }

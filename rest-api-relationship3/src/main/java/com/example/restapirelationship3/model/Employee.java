@@ -30,7 +30,7 @@ public class Employee {
 		telephone.getEmployees().add(this);
 	}
 
-	public Employee(String string) {
-		// TODO Auto-generated constructor stub
-	}
+//	public Employee(String string) {
+//	
+//	}
 }

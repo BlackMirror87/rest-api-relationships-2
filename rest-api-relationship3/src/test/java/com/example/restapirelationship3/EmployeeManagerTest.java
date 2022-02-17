@@ -40,8 +40,8 @@ class EmployeeManagerTest {
 	void shouldReturnAllEmployees() {
 
 		List<Employee> employees = new ArrayList<Employee>();
-		employees.add(new Employee("max"));
-		employees.add(new Employee("jan"));
+		employees.add(new Employee());
+		employees.add(new Employee());
 
 		when(employeeRepository.findAll()).thenReturn(employees);
 
@@ -85,4 +85,28 @@ class EmployeeManagerTest {
 		verify(employeeRepository).deleteById(employee.getId());
 	}
 
+	@Test
+	void shouldReturnEmployeeByName() {
+
+		Employee employee = new Employee();
+		employee.setName("max");
+
+		when(employeeRepository.findByName(employee.getName())).thenReturn(employee);
+
+		Employee expectedEmployee = employeeManager.findByName(employee.getName());
+
+		assertThat(expectedEmployee.getName()).isEqualTo(employee.getName());
+	}
+
+	@Test
+	void shouldThrowExceptionWhenNameNotExists() {
+
+		Employee employee = new Employee();
+		employee.setName("max");
+		employeeRepository.save(employee);
+
+		when(employeeRepository.findByName(any())).thenReturn(null);
+
+		assertThrows(NoSuchElementException.class, () -> employeeManager.findByName("jan"));
+	}
 }

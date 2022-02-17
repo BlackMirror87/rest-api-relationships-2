@@ -33,8 +33,8 @@ public class EmployeeController {
 		return employeeManager.findAll();
 	}
 
-	@GetMapping("/employees/{name}")
-	public Employee findEmployeeByName(@PathVariable String name) {
+	@GetMapping("/employees/name/{name}")
+	public Employee findEmployeeByName(@PathVariable String name) throws Exception {
 		return employeeManager.findByName(name);
 	}
 
