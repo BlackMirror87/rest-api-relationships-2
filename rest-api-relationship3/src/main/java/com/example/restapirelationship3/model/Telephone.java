@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @ToString
 public class Telephone {
 
@@ -27,4 +28,6 @@ public class Telephone {
 		this.employees.add(employee);
 		employee.getTelephones().add(this);
 	}
+
+
 }

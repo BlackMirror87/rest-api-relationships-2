@@ -29,8 +29,4 @@ public class Employee {
 		this.telephones.add(telephone);
 		telephone.getEmployees().add(this);
 	}
-
-//	public Employee(String string) {
-//	
-//	}
 }
